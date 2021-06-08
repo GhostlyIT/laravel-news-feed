@@ -4,7 +4,7 @@
 @section('content')
     <div class="text-center">
         <h3>News Feed Manager</h3>
-        <p>Категории</p>
+        <p>Новости</p>
     </div>
     @if (\Session::has('message'))
         <div class="alert alert-success">
