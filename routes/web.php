@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\ManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,5 +14,10 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('manager')->group(function() {
+    Route::get('/', [ManagerController::class, 'index']);
+    Route::get('/news/create', [ManagerController::class, 'createNewsPage'])->name('manager.create.news');
 });
 
