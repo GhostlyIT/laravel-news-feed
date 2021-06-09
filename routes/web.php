@@ -4,6 +4,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Manager\CategoryController as ManagerCategoryController;
 use App\Http\Controllers\Manager\NewsController as ManagerNewsController;
+use App\Http\Controllers\MainPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,8 @@ use App\Http\Controllers\Manager\NewsController as ManagerNewsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MainPageController::class, 'index']);
+
 
 Route::prefix('manager')->group(function() {
     Route::get('/', [ManagerController::class, 'index']);
@@ -37,9 +37,10 @@ Route::prefix('manager')->group(function() {
 });
 
 Route::prefix('news')->group(function() {
-   Route::post('/', [NewsController::class, 'store'])->name('news.store');
+    Route::post('/', [NewsController::class, 'store'])->name('news.store');
     Route::post('/{id}/delete', [NewsController::class, 'delete'])->name('news.delete');
     Route::post('/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
+    Route::get('/{id}', [NewsController::class, 'show'])->name('news.show');
 });
 
 Route::prefix('category')->group(function() {
