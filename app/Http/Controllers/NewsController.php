@@ -44,4 +44,16 @@ class NewsController extends Controller
         News::findOrFail($id)->delete();
         return back()->with('message', 'Новость успешно удалена');
     }
+
+    public function show(int $id)
+    {
+        $news = News::find($id);
+
+        if ($news === NULL) abort(404);
+
+        return view('news', [
+            'news' => $news,
+            'category' => $news->category
+        ]);
+    }
 }
